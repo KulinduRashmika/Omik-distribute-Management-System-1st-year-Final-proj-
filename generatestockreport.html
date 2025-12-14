@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Stock Report</title>
+    <style>
+        /* Embedded CSS */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .form-container {
+            width: 100%;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input, textarea, select, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Embedded jQuery
+        $(document).ready(function () {
+            // Show/hide custom status input
+            $("#status").change(function () {
+                if ($(this).val() === "custom") {
+                    $("#customStatusContainer").removeClass("hidden");
+                } else {
+                    $("#customStatusContainer").addClass("hidden");
+                    $("#customStatus").val(""); // Clear the custom status input
+                }
+            });
+
+            // Form submission validation
+            $("#stockReportForm").on("submit", function (e) {
+                let isValid = true;
+
+                // Validate StockID
+                const stockID = $("#stockID").val().trim();
+                if (stockID === "") {
+                    alert("StockID is required.");
+                    isValid = false;
+                }
+
+                // Validate Amount
+                const amount = parseFloat($("#amount").val());
+                if (isNaN(amount) || amount <= 0) {
+                    alert("Amount must be a positive number.");
+                    isValid = false;
+                }
+
+                // Validate Quantity
+                const quantity = parseInt($("#quantityAvailable").val());
+                if (isNaN(quantity) || quantity < 0) {
+                    alert("Quantity Available must be a non-negative number.");
+                    isValid = false;
+                }
+
+                // Validate Unit Price
+                const unitPrice = parseFloat($("#unitPrice").val());
+                if (isNaN(unitPrice) || unitPrice <= 0) {
+                    alert("Unit Price must be a positive number.");
+                    isValid = false;
+                }
+
+                // Validate Stock Date
+                const stockDate = $("#stockDate").val();
+                if (stockDate === "") {
+                    alert("Stock Date is required.");
+                    isValid = false;
+                }
+
+                // Validate Expiry Date
+                const expiryDate = $("#expiryDate").val();
+                if (expiryDate === "") {
+                    alert("Expiry Date is required.");
+                    isValid = false;
+                }
+
+                // Validate Status
+                const status = $("#status").val();
+                const customStatus = $("#customStatus").val().trim();
+                if (status === "") {
+                    alert("Status is required.");
+                    isValid = false;
+                } else if (status === "custom" && customStatus === "") {
+                    alert("Custom status cannot be empty.");
+                    isValid = false;
+                }
+
+                if (!isValid) {
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Generate Stock Report</h2>
+        <form id="stockReportForm" method="POST" action="generatestockreport.php">
+            <label for="stockid">StockID:</label>
+            <input type="text" id="stockid" name="stockid" placeholder="Enter Stock ID" required>
+
+            <label for="amount">Amount:</label>
+            <input type="text" id="amount" name="amount" placeholder="Enter Amount" step="0.01" required>
+
+            <label for="quantityavailable">Quantity Available:</label>
+            <input type="number" id="quantityavailable" name="quantityavailable" placeholder="Enter Quantity Available" required>
+
+            <label for="unitprice">Unit Price:</label>
+            <input type="number" id="unitprice" name="unitprice" placeholder="Enter Unit Price" step="0.01" required>
+
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
+                <option value="" disabled selected>Select Status</option>
+                <option value="Available">Available</option>
+                <option value="Out of Stock">Out of Stock</option>
+                
+            </select>
+
+            <div id="customStatusContainer" class="hidden">
+                <label for="customstatus">Custom Status:</label>
+                <input type="text" id="customstatus" name="customstatus" placeholder="Enter Custom Status">
+            </div>
+
+            <label for="stockdate">Date Added:</label>
+            <input type="date" id="stockdate" name="stockdate" required>
+
+            <label for="expirydate">Expiry Date:</label>
+            <input type="date" id="expirydate" name="expirydate" required>
+
+            <button type="submit">Generate Report</button>
+        </form>
+    </div>
+</body>
+</html>

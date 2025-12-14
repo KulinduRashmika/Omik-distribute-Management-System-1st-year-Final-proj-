@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Payroll</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .back-button {
+            text-align: left;
+            position: absolute; /* Ensure absolute positioning */
+            top: 10px; /* 10px from the top */
+            left:px; /* 10px from the left to position it on the left side */
+            padding: 10px ;
+            background-color: #011831;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+        #success-message {
+            color: green;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        #error-message {
+            color: red;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        
+
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Validate form and submit using AJAX
+            $("form").submit(function(event) {
+                event.preventDefault(); // Prevent default form submission
+                
+                // Clear previous messages
+                $('#success-message').hide();
+                $('#error-message').hide();
+
+                // Get form data
+                var formData = $(this).serialize();
+
+                // Perform the AJAX request to submit the form data
+                $.ajax({
+                    url: "generatepayrolls.php",
+                    type: "POST",
+                    data: formData,
+                    dataType: "json",
+                    success: function(response) {
+                        if(response.status == 'success') {
+                            $('#success-message').text(response.message).show();
+                        } else {
+                            $('#error-message').text(response.message).show();
+                        }
+                    },
+                    error: function() {
+                        $('#error-message').text('An error occurred while submitting the form.').show();
+                    }
+                });
+            });
+        });
+    </script>
+    <script>
+        function calculateTotalSalary() {
+            const basicPay = parseFloat(document.getElementById('basic').value) || 0;
+            const etf = parseFloat(document.getElementById('etf').value) || 0;
+            const totalSalary = basicPay - etf;
+            document.getElementById('totsalary').value = totalSalary.toFixed(2);
+        }
+    </script>
+</head>
+<body>
+
+    <div class="container">
+
+         <a href="financemanagerdashboard.html" class="back-button">Back</a>
+
+        <h2>Generate Payroll</h2>
+        <form action="generatepayrolls.php" method="POST">
+            <div class="form-group">
+                <label for="payrollid">Payroll ID:</label>
+                <input type="text" id="payrollid" name="payrollid" required>
+            </div>
+            <div class="form-group">
+                <label for="month">Month:</label>
+                <input type="month" id="month" name="month" required>
+            </div>
+            <div class="form-group">
+                <label for="accno">Account No:</label>
+                <input type="text" id="accno" name="accno" required>
+            </div>
+            <div class="form-group">
+                <label for="basic">Basic Pay:</label>
+                <input type="text" id="basic" name="basic" oninput="calculateTotalSalary()" required>
+            </div>
+            <div class="form-group">
+                <label for="etf">ETF:</label>
+                <input type="text" id="etf" name="etf" oninput="calculateTotalSalary()" required>
+            </div>
+            <div class="form-group">
+                <label for="totsalary">Total Salary:</label>
+                <input type="text" id="totsalary" name="totsalary" readonly required>
+            </div>
+            <button type="submit">Generate Payroll</button>
+        </form>
+        
+        
+        <!-- Success and Error messages -->
+        <div id="success-message"></div>
+        <div id="error-message"></div>
+    </div>
+    
+ 
+</body>
+
+</html>
