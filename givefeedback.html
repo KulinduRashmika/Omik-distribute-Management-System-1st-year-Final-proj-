@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Give Feedback</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            
+            color: #333;
+        }
+        .feedback-form {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 400px;
+        }
+        .feedback-form h2 {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .feedback-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .feedback-form input,
+        .feedback-form textarea,
+        .feedback-form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .feedback-form button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .feedback-form button:hover {
+            background-color: #0056b3;
+        }
+         .back-button {
+            text-align: left;
+            position: absolute; /* Ensure absolute positioning */
+            top: 10px; /* 10px from the top */
+            left: 65px; /* 10px from the left to position it on the left side */
+            padding: 15px ;
+            background-color: #011831;
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .back-button:hover {
+            background-color: #0056b3;
+        }
+
+                      
+    </style>
+</head>
+<body>
+    <form action="givefeedback.php" method="POST" class="feedback-form">
+        <h2>Give Feedback</h2>
+        
+        <label for="feedbackid">FeedbackID:</label>
+        <input type="text" id="feedbackid" name="feedbackid" required>
+
+        <label for="customername">Customer Name:</label>
+        <input type="text" id="customername" name="customername" required>
+
+
+       
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="content">Content:</label>
+        <textarea id="content" name="content" rows="5" required></textarea>
+
+        <button type="submit">Submit Feedback</button>
+
+    </form>
+    
+    <form action="customerdashboard.html" method="GET">
+           <button type="submit" class="back-button">Back</button>
+       
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Staff</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        form {
+            max-width: 500px;
+            margin: auto;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add New Staff</h1>
+    <form action="addstaff.php" method="POST">
+        <label for="staffid">Staff ID:</label>
+        <input type="text" id="staffid" name="staffid" placeholder="Enter Staff ID" required>
+
+        <label for="staffname">Full Name:</label>
+        <input type="text" id="staffname" name="staffname" placeholder="Enter full name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter email address" required>
+
+        <label for="phone">Phone Number:</label>
+        <input type="text" id="phone" name="phone" placeholder="Enter phone number" required>
+
+        <label for="position">Account No.:</label>
+        <input type="text" id="position" name="position" placeholder="Enter staff position" required>
+
+        <label for="department">Department:</label>
+        <select id="department" name="department" required>
+            <option value="">Select Department</option>
+            <option value="Transport">Transport</option>
+            <option value="Finance">Finance</option>
+            <option value="Marketing">Marketing</option>
+        </select>
+
+        <label for="address">Address:</label>
+        <textarea id="address" name="address" placeholder="Enter address" rows="3" required></textarea>
+
+        <button type="submit">Add Staff</button>
+    </form>
+</body>
+</html>

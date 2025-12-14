@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate Expense Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+        .form-container {
+            max-width: 500px;
+            margin: auto;
+        }
+        .form-container label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .form-container input, 
+        .form-container select, 
+        .form-container textarea, 
+        .form-container button {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container button {
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #218838;
+        }
+        h1{
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 0.5px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Expense Report</h1>
+    <div class="form-container">
+        <form action="genareteexpensereport.php" method="POST">
+            <label for="date">Expense Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            
+            
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="3" required></textarea>
+
+            <label for="amount">Amount:</label>
+            <input type="amount" id="amount" name="amount" step="1" min="0" required>
+
+            <button type="submit">Save Report</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+    <style>
+        /* General Page Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-top: 30px;
+        }
+
+        /* Form Container */
+        .form-container {
+            width: 100%;
+            max-width: 500px;
+            background-color: white;
+            margin: 40px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Form Styling */
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="date"], input[type="number"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #2980b9;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #3498db;
+        }
+
+        /* Focus and hover effects */
+        input[type="text"]:focus, input[type="date"]:focus, input[type="number"]:focus {
+            border-color: #2980b9;
+            outline: none;
+        }
+
+        /* Media Queries */
+        @media (max-width: 600px) {
+            .form-container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Add Task</h2>
+    <div class="form-container">
+        <form method="post" action="addtask.php">
+            <label for="taskname">Task Name:</label>
+            <input type="text" name="taskname" required><br>
+
+            <label for="startdate">Start Date:</label>
+            <input type="date" name="startdate" required><br>
+
+            <label for="enddate">End Date:</label>
+            <input type="date" name="enddate" required><br>
+
+            <label for="Type">Type:</label>
+            <input type="text" name="Type" required><br>
+
+            <label for="value">Value:</label>
+            <input type="number" name="value" required><br>
+
+            <input type="submit" name="add" value="Add Task">
+        </form>
+    </div>
+</body>
+</html>

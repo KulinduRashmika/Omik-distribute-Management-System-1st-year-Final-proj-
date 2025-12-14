@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Customer Feedback</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 class="text-center">View Customer Feedback</h1>
+    <form id="searchForm" class="mb-4">
+        <div class="mb-3">
+            <label for="customerName" class="form-label">Customer Name</label>
+            <input type="text" class="form-control" id="customerName" name="customerName" placeholder="Enter customer name" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </form>
+    <div id="feedbackResults" class="mt-4">
+        <!-- Feedback results will appear here -->
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#searchForm').on('submit', function (e) {
+            e.preventDefault();
+
+            const customerName = $('#customerName').val().trim();
+            if (customerName === '') {
+                $('#feedbackResults').html('<div class="alert alert-danger">Please enter a customer name to search.</div>');
+                return;
+            }
+
+            // Fetch feedback using AJAX
+            $.ajax({
+                url: 'viewfeedback.php',
+                type: 'GET',
+                data: { customerName: customerName },
+                success: function (response) {
+                    $('#feedbackResults').html(response);
+                },
+                error: function () {
+                    $('#feedbackResults').html('<div class="alert alert-danger">An error occurred while fetching feedback.</div>');
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

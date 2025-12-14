@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Supplier Order</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-container label {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="number"],
+        .form-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .form-container input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .form-container input:focus {
+            border-color: #4CAF50;
+        }
+
+        .form-container .action-btn {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        .form-container .action-btn:hover {
+            background-color: #e67e22;
+        }
+
+        .form-container .delete-btn {
+            background-color: #e74c3c;
+        }
+
+        .form-container .delete-btn:hover {
+            background-color: #c0392b;
+        }
+
+        .form-container p {
+            text-align: center;
+            color: #888;
+        }
+
+        .form-container .btn-container {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <h2>Place Supplier Order</h2>
+     
+    <div class="form-container">
+        <form method="post" action="placesupporder.php">
+
+            <label for="suporderid">Supplier Order ID:</label>
+            <input type="text" name="suporderid" required>
+
+            <label for="ordername">Order Name:</label>
+            <input type="text" name="ordername" required>
+
+            <label for="amount">Unit Price:</label>
+            <input type="number" name="amount" required>
+
+            <label for="qty">Quantity:</label>
+            <input type="number" name="qty" required>
+
+            <div class="btn-container">
+                <input type="submit" name="add" value="Add">
+            </div>
+        </form>
+    </div>
+
+</body>
+
+               
+</html>
