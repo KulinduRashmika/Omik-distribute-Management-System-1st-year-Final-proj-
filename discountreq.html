@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discount Request Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+        }
+        h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .output {
+            font-weight: bold;
+            margin-top: 10px;
+            color: green;
+            text-align: center;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2>Discount Request Form</h2>
+        <form id="discountForm">
+            <label for="discountID">Discount ID</label>
+            <input type="text" id="discountID" name="discountID" placeholder="Enter Discount ID" required>
+            
+            <label for="productName">Product Name</label>
+            <input type="text" id="productName" name="productName" placeholder="Enter Discount Name" required>
+            
+            <label for="originalPrice">Original Price</label>
+            <input type="number" id="originalPrice" name="originalPrice" placeholder="Enter Original Price" required>
+            
+            <label for="discountAmount">Discount Amount (%)</label>
+            <input type="number" id="discountAmount" name="discountAmount" placeholder="Enter Discount Percentage" required>
+            
+            <label for="startDate">Start Date</label>
+            <input type="date" id="startDate" name="startDate" required>
+            
+            <label for="endDate">End Date</label>
+            <input type="date" id="endDate" name="endDate" required>
+            
+            <div class="output" id="discountedPriceOutput">Discounted Price: $0.00</div>
+            
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+   <script>
+    $(document).ready(function () {
+        // Calculate discounted price dynamically
+        $('#originalPrice, #discountAmount').on('input', function () {
+            const originalPrice = parseFloat($('#originalPrice').val()) || 0;
+            const discountPercentage = parseFloat($('#discountAmount').val()) || 0;
+            const discountedPrice = originalPrice - (originalPrice * (discountPercentage / 100));
+            $('#discountedPriceOutput').text(`Discounted Price: $${discountedPrice.toFixed(2)}`);
+        });
+
+        // Submit form via AJAX
+        $('#discountForm').on('submit', function (e) {
+            e.preventDefault();
+            const formData = $(this).serialize();
+
+            $.ajax({
+                url: 'discountreq.php',
+                type: 'POST',
+                data: formData,
+                success: function (response) {
+                    alert('Discount request submitted successfully!');
+                    $('#discountForm')[0].reset();
+                    $('#discountedPriceOutput').text('Discounted Price: $0.00');
+                },
+                error: function () {
+                    alert('Failed to submit the discount request.');
+                }
+            });
+        });
+    });
+</script>
+
+    
+</body>
+</html>

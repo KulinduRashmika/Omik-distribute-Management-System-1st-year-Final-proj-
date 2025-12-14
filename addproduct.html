@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            max-width: 100%;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .form-container p {
+            text-align: center;
+        }
+
+        .form-container input[type="text"]:focus,
+        .form-container input[type="number"]:focus,
+        .form-container select:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Add Product</h2>
+        <form method="post" action="addproduct.php">
+            <label for="pid">Product ID:</label>
+            <input type="text" name="pid" required><br>
+
+            <label for="pname">Product Name:</label>
+            <input type="text" name="pname" required><br>
+
+            <label for="price">Price:</label>
+            <input type="number" name="price" required><br>
+
+            <label for="stockqty">Stock Quantity:</label>
+            <input type="number" name="stockqty" required><br>
+
+            <label for="status">Status:</label>
+            <select name="status" required>
+                <option value="" disabled selected>Select Status</option>
+                <option value="Available">Available</option>
+                <option value="Out of Stock">Out of Stock</option>
+                <option value="Discontinued">Discontinued</option>
+            </select><br>
+
+            <input type="submit" name="add_product" value="Add Product">
+        </form>
+    </div>
+</body>
+</html>

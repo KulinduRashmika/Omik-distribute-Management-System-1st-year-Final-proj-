@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Customer Orders</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .form-container {
+            margin: 20px 0;
+        }
+        select, button {
+            padding: 8px 12px;
+            margin: 5px 0;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Customer Orders</h2>
+<div id="order-list">
+    <!-- Orders will be displayed here -->
+</div>
+
+<div class="form-container">
+    <h3>Update Delivery Status</h3>
+    <form id="update-status-form">
+        <label for="cusid">Customer ID:</label>
+        <input type="text" id="cusid" name="cusid" readonly><br>
+        <label for="deliverystatus">Delivery Status:</label>
+        <select id="deliverystatus" name="deliverystatus">
+            <option value="Pending">Pending</option>
+            <option value="Shipped">Shipped</option>
+            <option value="Delivered">Delivered</option>
+            <option value="Cancelled">Cancelled</option>
+        </select><br>
+        <button type="submit">Update Status</button>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Fetch orders
+        function loadOrders() {
+            $.ajax({
+                url: 'viewcustomerorder.php',
+                method: 'GET',
+                success: function (response) {
+                    $('#order-list').html(response);
+                }
+            });
+        }
+        loadOrders();
+
+        // Handle form submission
+        $('#update-status-form').on('submit', function (e) {
+            e.preventDefault();
+            const cusid = $('#cusid').val();
+            const status = $('#deliverystatus').val();
+            if (cusid && status) {
+                $.ajax({
+                    url: 'updatedeliverystatus.php',
+                    method: 'POST',
+                    data: { cusid: cusid, deliverystatus: status },
+                    success: function (response) {
+                        alert(response);
+                        loadOrders(); // Reload the orders table
+                    }
+                });
+            } else {
+                alert("Please select a customer ID and delivery status.");
+            }
+        });
+
+        // Populate form on row click
+        $(document).on('click', '.order-row', function () {
+            const cusid = $(this).data('cusid');
+            $('#cusid').val(cusid);
+            const currentStatus = $(this).find('.status').text(); // Get current delivery status from the table
+            $('#deliverystatus').val(currentStatus); // Set it to the combo box
+        });
+    });
+</script>
+
+</body>
+</html>

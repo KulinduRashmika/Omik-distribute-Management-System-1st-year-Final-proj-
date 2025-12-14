@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Expired Products</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-container {
+            width: 50%;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: #f9f9f9;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin: 10px 0 5px;
+        }
+        input[type="text"], input[type="number"] {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .message {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Add Expired Products</h2>
+    <!-- The action attribute points to the PHP script -->
+    <form id="expired-product-form" method="POST" action="addexpiredproducttrans.php">
+        <label for="productid">Product ID:</label>
+        <input type="text" id="productid" name="productid" required>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" id="quantity" name="quantity" required>
+
+        <label for="amount">Amount (per unit):</label>
+        <input type="number" id="amount" name="amount" required>
+
+        <label for="totamount">Total Amount:</label>
+        <input type="number" id="totamount" name="totamount" readonly>
+
+        <button type="submit">Add Product</button>
+        <div class="message" id="form-message"></div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const quantityInput = document.getElementById('quantity');
+        const amountInput = document.getElementById('amount');
+        const totAmountInput = document.getElementById('totamount');
+
+        function calculateTotal() {
+            const quantity = parseFloat(quantityInput.value) || 0;
+            const amount = parseFloat(amountInput.value) || 0;
+            totAmountInput.value = (quantity * amount).toFixed(2); // Calculate total amount
+        }
+
+        // Attach event listeners to quantity and amount inputs
+        quantityInput.addEventListener('input', calculateTotal);
+        amountInput.addEventListener('input', calculateTotal);
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Attendance & Request Leave</title>
+    <style>
+        body {
+             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: ;
+            height: 100vh;
+
+
+        }
+        form {
+            margin-bottom: 20px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, textarea, select, button {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .secondtable{
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .firsttable{
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        h1{
+             font-size: 1.8em;
+            color: #333;
+            margin-bottom: 655px;
+            text-align: center;
+            font-weight: bold;
+
+        
+        }
+        
+    </style>
+</head>
+<body>
+    <h1>Add Attendance & <br>
+     Request Leave</h1>
+
+    <!-- Form for Adding Attendance -->
+    <div class="firsttable">
+    <form action="saveattendence.php" method="POST">
+        <h2>Add Attendance</h2>
+        <label for="empid">Employee ID:</label>
+        <input type="text" id="empid" name="empid" required>
+
+         <label for="date">Date:</label>
+        <input type="Date" id="Date" name="date" required>
+
+
+        <label for="intime">Intime:</label>
+        <input type="time" id="intime" name="intime" required>
+
+        <label for="outtime">Outtime:</label>
+        <input type="time" id="outtime" name="outtime" required>
+
+        
+
+        <button type="submit">Submit Attendance</button>
+    </form>
+</div>
+
+    <!-- Form for Requesting Leave -->
+    <div class="secondtable">
+    <form action="requstleave.php" method="POST">
+        <h2>Request Leave</h2>
+        <label for="sid">Staff ID:</label>
+        <input type="text" id="sid" name="sid" required>
+
+        <label for="leavedate">Leave Date:</label>
+        <input type="date" id="leavedate" name="leavedate" required>
+
+        <label for="enddate">End Date:</label>
+        <input type="date" id="enddate" name="enddate" required>
+
+
+        <label for="reason">Reason for Leave:</label>
+        <textarea id="reason" name="reason" rows="4" required></textarea>
+
+        <button type="submit">Request Leave</button>
+    </form>
+    </div>
+    
+</body>
+</html>

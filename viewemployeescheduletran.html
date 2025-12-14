@@ -1,0 +1,118 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Employee Schedule</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #007BFF;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .loader {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .loader img {
+            width: 50px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>View Employee Schedule</h1>
+        <div class="loader">
+            <img src="https://i.gifer.com/YCZH.gif" alt="Loading">
+        </div>
+        <table id="scheduleTable">
+            <thead>
+                <tr>
+                    <th>Schedule ID</th>
+                    <th>Employee Name</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Data will be dynamically loaded here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            function loadSchedules() {
+                $(".loader").show(); // Show loader
+                $.ajax({
+                    url: "viewemployeescheduletran.php",
+                    method: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        $(".loader").hide(); // Hide loader
+                        let tableRows = "";
+                        if (data.length > 0) {
+                            data.forEach(schedule => {
+                                tableRows += `
+                                    <tr>
+                                        <td>${schedule.esid}</td>
+                                        <td>${schedule.esname}</td>
+                                        <td>${schedule.description}</td>
+                                        <td>${schedule.date}</td>
+                                    </tr>`;
+                            });
+                        } else {
+                            tableRows = `<tr><td colspan="4" style="text-align:center;">No schedules found</td></tr>`;
+                        }
+                        $("#scheduleTable tbody").html(tableRows);
+                    },
+                    error: function () {
+                        $(".loader").hide(); // Hide loader
+                        alert("Failed to load schedules. Please try again.");
+                    }
+                });
+            }
+
+            loadSchedules(); // Initial load
+        });
+    </script>
+</body>
+</html>
