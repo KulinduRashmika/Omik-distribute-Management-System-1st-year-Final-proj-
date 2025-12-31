@@ -62,4 +62,4 @@ This project was developed for educational purposes to demonstrate:
 ## 📄 License
 
 This project is created for academic use. Feel free to explore and learn from the code.
-# Omik-distribute-Management-System-1st-year-Final-proj-
+
